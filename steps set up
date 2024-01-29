@@ -16,81 +16,11 @@ react app steps-
 5. npm install webpack webpack-cli
 5. npm install sass-loader style-loader html-loader css-loader webpack-dev-server --save-dev command on cli
 
-package.json-
-{
-  "name": "apna-section",
-  "version": "0.1.0",
-  "main": "index.js",
-  "scripts": {
-    "start": "webpack-dev-server --mode development --open",
-    "build": "webpack"
-  },
-  "dependencies": {
-    "react": "^18.2.0",
-    "react-dom": "^18.2.0",
-    "react-scripts": "5.0.1",
-    "webpack": "^5.89.0"
-  },
-  "devDependencies": {
-    "webpack-dev-server": "^4.15.1",
-    "css-loader": "^6.9.1",
-    "html-loader": "~0.5.5",
-    "node-cmd": "~3.0.0",
-    "npm-run-all": "~4.1.5",
-    "sass-loader": "^14.0.0",
-    "style-loader": "^3.3.4",
-    "webpack-cli": "^5.1.4"
-  }
-}
+server setup-
+1. npm init
+2. npm i express cors mongoose body-parser --save
+3. npm i nodemon --save
+4. download and install mongodb community server, mongodb compass
+5. Do changes in package.json, index.js of server, functioncomponent.js of client
 
-webpack.config.js-
-const path = require('path')
 
-module.exports = {
-  mode: 'development',
-  entry: path.resolve(__dirname, 'src', 'index.js'),
-  output: {
-    path: path.resolve(__dirname, 'public'),
-    filename: 'bundle.js'
-  },
-  module: {
-    rules: [{
-      test: /\.css$/,
-      use: ['style-loader', 'css-loader']
-    }]
-  },
-  devServer: {
-    static: path.join(__dirname, 'public'),
-    port: 3000
-  }
-}
-
-index.js-
-import React from 'react';
-import ReactDOM from 'react-dom/client';
-import './index.css';
-
-const root = ReactDOM.createRoot(document.getElementById('root'));
-console.log('hi');
-
-index.html-
-<!DOCTYPE html>
-<html lang="en">
-  <head>
-    <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <meta name="theme-color" content="#000000" />
-    <meta
-      name="description"
-      content="Web site created using create-react-app"
-    />
-    
-    <title>React App</title>
-  </head>
-  <body>
-    <noscript>You need to enable JavaScript to run this app.</noscript>
-    <div id="root">
-      <script src="bundle.js" async defer></script>
-    </div>
-  </body>
-</html>
