@@ -3,6 +3,7 @@ import {useState} from 'react';
 import {useEffect} from 'react';
 import axios from 'axios';
 axios.defaults.baseURL = "http://localhost:8080/";
+import {Button} from 'react-bootstrap';
 
 // props getting in function and showing 
 function Student (props) {
@@ -120,8 +121,8 @@ export function FunctionComponent () {
 										<td>{el.email}</td>
 										<td>{el.year}</td>
 										<td>
-											<button onClick={()=>handleEdit(el)}>Edit</button>
-											<button onClick={()=>handleDelete(el._id)}>Delete</button>
+											<Button onClick={()=>handleEdit(el)}>Edit</Button>
+											<Button onClick={()=>handleDelete(el._id)}>Delete</Button>
 										</td>
 									</tr>
 								)
