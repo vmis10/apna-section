@@ -23,4 +23,8 @@ server setup-
 4. download and install mongodb community server, mongodb compass
 5. Do changes in package.json, index.js of server, functioncomponent.js of client
 
+git clone setup-
+git clone <github url>
+npm install in client and server folders
+
 
