@@ -26,5 +26,6 @@ server setup-
 git clone setup-
 git clone <github url>
 npm install in client and server folders
+git checkout master -> git merge devBranch ->git push origin master
 
 
