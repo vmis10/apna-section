@@ -1,0 +1,96 @@
+download sublimetext editor
+xampp apacher server
+download and install node.js
+npm install -g sass command on cli
+npm install -g grunt-cli command on cli
+npm install grunt-cli --save-dev command on cli
+creating package.json, Gruntfile.js
+npm install command on cli
+
+
+react app steps-
+1. download and install node.js
+2. npm create-react-app apna-section
+3. cd apna-section npm install
+4. modify package.json and create webpack.config.js
+5. npm install webpack webpack-cli
+5. npm install sass-loader style-loader html-loader css-loader webpack-dev-server --save-dev command on cli
+
+package.json-
+{
+  "name": "apna-section",
+  "version": "0.1.0",
+  "main": "index.js",
+  "scripts": {
+    "start": "webpack-dev-server --mode development --open",
+    "build": "webpack"
+  },
+  "dependencies": {
+    "react": "^18.2.0",
+    "react-dom": "^18.2.0",
+    "react-scripts": "5.0.1",
+    "webpack": "^5.89.0"
+  },
+  "devDependencies": {
+    "webpack-dev-server": "^4.15.1",
+    "css-loader": "^6.9.1",
+    "html-loader": "~0.5.5",
+    "node-cmd": "~3.0.0",
+    "npm-run-all": "~4.1.5",
+    "sass-loader": "^14.0.0",
+    "style-loader": "^3.3.4",
+    "webpack-cli": "^5.1.4"
+  }
+}
+
+webpack.config.js-
+const path = require('path')
+
+module.exports = {
+  mode: 'development',
+  entry: path.resolve(__dirname, 'src', 'index.js'),
+  output: {
+    path: path.resolve(__dirname, 'public'),
+    filename: 'bundle.js'
+  },
+  module: {
+    rules: [{
+      test: /\.css$/,
+      use: ['style-loader', 'css-loader']
+    }]
+  },
+  devServer: {
+    static: path.join(__dirname, 'public'),
+    port: 3000
+  }
+}
+
+index.js-
+import React from 'react';
+import ReactDOM from 'react-dom/client';
+import './index.css';
+
+const root = ReactDOM.createRoot(document.getElementById('root'));
+console.log('hi');
+
+index.html-
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="theme-color" content="#000000" />
+    <meta
+      name="description"
+      content="Web site created using create-react-app"
+    />
+    
+    <title>React App</title>
+  </head>
+  <body>
+    <noscript>You need to enable JavaScript to run this app.</noscript>
+    <div id="root">
+      <script src="bundle.js" async defer></script>
+    </div>
+  </body>
+</html>
