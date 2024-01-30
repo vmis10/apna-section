@@ -1,10 +1,12 @@
 import React, {Component} from 'react';
-import {Link} from 'react-router-dom';
+import {Link, NavLink} from 'react-router-dom';
 function NavBar () {
 	return (
 		<div>
-			<Link to='/'>Home</Link>
-			<Link to='/positions'>positions</Link>
+			<ul>
+				<li><NavLink to='/'>Home</NavLink></li>
+				<li><NavLink to='/positions'>positions</NavLink></li>
+			</ul>
 		</div>
 	)
 }
