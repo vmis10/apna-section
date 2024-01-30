@@ -1,8 +1,8 @@
 import React, {Component} from 'react';
 import {useState} from 'react';
-import {Home} from './component/Home';
-import {Positions} from './component/Positions';
-import NavBar from './component/NavBar';
+import HomeContainer from './containers/HomeContainer';
+import {Positions} from './components/Positions';
+import NavBar from './components/NavBar';
 import {BrowserRouter, Routes, Route} from 'react-router-dom';
 //functional component example
 export function App () {
@@ -11,7 +11,7 @@ export function App () {
 			<BrowserRouter>
 				<NavBar/>
 				<Routes>
-					<Route path='/' element={<Home/>}/>
+					<Route path='/' element={<HomeContainer/>}/>
 					<Route path='/positions' element={<Positions/>}/>
 				</Routes>
 			</BrowserRouter>
