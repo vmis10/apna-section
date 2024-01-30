@@ -1,21 +1,21 @@
-import React, {Component} from 'react';
-import {useState} from 'react';
-import HomeContainer from './containers/HomeContainer';
-import {Positions} from './components/Positions';
-import NavBar from './components/NavBar';
+import React from 'react';
 import {BrowserRouter, Routes, Route} from 'react-router-dom';
-//functional component example
-export function App () {
-	return (
-		<div className="App">
-			<BrowserRouter>
-				<NavBar/>
-				<Routes>
-					<Route path='/' element={<HomeContainer/>}/>
-					<Route path='/positions' element={<Positions/>}/>
-				</Routes>
-			</BrowserRouter>
-		</div>
-	);
+
+import MainLayout from './MainLayout';
+import Home from './components/Home';
+import Positions from './components/Positions';
+
+function App() {
+  return (
+    <BrowserRouter>
+        <Routes>
+          <Route path="/" element={<MainLayout />}>
+            <Route path="" element={<Home />} />
+            <Route path="/positions" element={<Positions />} />
+          </Route>
+        </Routes>
+    </BrowserRouter>
+  );
 }
-        
+
+export default App;   

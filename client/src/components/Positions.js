@@ -17,7 +17,7 @@ function Student (props) {
 }
 
 //functional component example
-export function Positions () {
+export default function Positions () {
 	// initial state declaration of name, email, year prop
 	const [formData, setFormData] = useState({
 		name: "",
