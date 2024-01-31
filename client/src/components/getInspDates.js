@@ -1,17 +1,15 @@
 import React from 'react';
 import {useState, useEffect} from 'react';
-import {withRouter} from 'react-router-dom';
 import {Button, Table} from 'react-bootstrap';
+import ModalTemp from './ModalTemp';
+import axios from 'axios';
+axios.defaults.baseURL = "http://localhost:8080/";
 
-function getInspDates (props) {
-	const [data, setData] = useState({
-		ptandcrossing: "",
-		electricGen: "",
-		trd: "",
-		trackpwi: "",
-		ssd: ""
-	});
+function GetInspDates () {
 	const [dataList, setDataList] = useState([]);
+	const [show, setShow] = useState(false);
+	const handleClose = () => setShow(false);
+  	const handleShow = () => setShow(true);
 	const getFetchData = async()=>{
 		const data = await axios.get("/getinspdates");
 		const dataObj = data.data;
@@ -24,33 +22,41 @@ function getInspDates (props) {
 	},[]);
 	return (
 		<div className="tableContainer">
-				<Table striped bordered hover>
-					<thead>
-						<tr>
-							<th>Name</th>
-							<th>Email</th>
-							<th>Year</th>
-							<th></th>
-						</tr>
-					</thead>
-					<tbody>
-						{
-							dataList.map((el, i)=>{
-								return (
-									<tr key={i}>
-										<td>{el.name}</td>
-										<td>{el.email}</td>
-										<td>{el.year}</td>
-										<td>
-											<Button onClick={()=>handleEdit(el)}>Edit</Button>
-										</td>
-									</tr>
-								)
-							})
-						}
-					</tbody>
-				</Table>
-			</div>
+			<Table striped bordered hover>
+				<thead>
+					<tr>
+						<th>Station/IB/LC</th>
+						<th>Point & Crossing</th>
+						<th>Electric General</th>
+						<th>TRD Track Ckt</th>
+						<th>PWI Track Ckt</th>
+						<th>SSD</th>
+						<th></th>
+					</tr>
+				</thead>
+				<tbody>
+					{
+						dataList.map((el, i)=>{
+							return (
+								<tr key={i}>
+									<td>{el.name}</td>
+									<td>{el.ptandcrossing}</td>
+									<td>{el.electricGen}</td>
+									<td>{el.trd}</td>
+									<td>{el.trackpwi}</td>
+									<td>{el.ssd}</td>
+									<td>
+										<Button onClick={()=>handleEdit(el)}>Edit</Button>
+									</td>
+								</tr>
+							)
+						})
+					}
+				</tbody>
+			</Table>
+			<Button type="button" onClick={handleShow}>Add Inspections</Button>
+			<ModalTemp show={show} onClose={handleClose}/>
+		</div>
 	)
 }
-export default withRouter(UpdateInspDates);
+export default GetInspDates;

@@ -55,7 +55,7 @@ export default function Home () {
 		}
 	}
 	useEffect(()=>{
-		getFetchData()
+		//getFetchData()
 	},[]);
 	const handleDelete = async(id)=>{
 		const data = await axios.delete("/delete/"+id);
@@ -100,35 +100,6 @@ export default function Home () {
 					</span></p>
 					<button type="submit">Submit</button>
 				</form>
-			</div>
-			<div className="tableContainer">
-				<Table striped bordered hover>
-					<thead>
-						<tr>
-							<th>Name</th>
-							<th>Email</th>
-							<th>Year</th>
-							<th></th>
-						</tr>
-					</thead>
-					<tbody>
-						{
-							dataList.map((el, i)=>{
-								return (
-									<tr key={i}>
-										<td>{el.name}</td>
-										<td>{el.email}</td>
-										<td>{el.year}</td>
-										<td>
-											<Button onClick={()=>handleEdit(el)}>Edit</Button>
-											<Button onClick={()=>handleDelete(el._id)}>Delete</Button>
-										</td>
-									</tr>
-								)
-							})
-						}
-					</tbody>
-				</Table>
 			</div>
 		</div>
 	);
