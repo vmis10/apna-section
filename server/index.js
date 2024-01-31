@@ -9,9 +9,11 @@ const PORT = process.env.PORT || 8080;
 
 //schema
 const schemaData = mongoose.Schema({
-	name: String,
-	email: String,
-	year: String
+	ptandcrossing: Date,
+	electricGen: Date,
+	trd: Date,
+	trackpwi: Date,
+	ssd: Date
 }, {
 	timeStamp: true
 });
@@ -19,7 +21,7 @@ const schemaData = mongoose.Schema({
 const userModel = mongoose.model("user", schemaData);
 
 //read data
-app.get("/", async(req, res)=>{
+app.get("/getinspdates", async(req, res)=>{
 	const data = await userModel.find({})
 	res.json({success: true, data:data})
 });

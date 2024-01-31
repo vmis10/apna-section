@@ -3,7 +3,7 @@ import {useState} from 'react';
 import {useEffect} from 'react';
 import axios from 'axios';
 axios.defaults.baseURL = "http://localhost:8080/";
-import {Button} from 'react-bootstrap';
+import {Button, Table} from 'react-bootstrap';
 
 // props getting in function and showing 
 function Student (props) {
@@ -102,13 +102,12 @@ export default function Home () {
 				</form>
 			</div>
 			<div className="tableContainer">
-				<table>
+				<Table striped bordered hover>
 					<thead>
 						<tr>
 							<th>Name</th>
 							<th>Email</th>
 							<th>Year</th>
-							<th></th>
 							<th></th>
 						</tr>
 					</thead>
@@ -129,7 +128,7 @@ export default function Home () {
 							})
 						}
 					</tbody>
-				</table>
+				</Table>
 			</div>
 		</div>
 	);
