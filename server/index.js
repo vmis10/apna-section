@@ -8,7 +8,7 @@ app.use(express.json());
 const PORT = process.env.PORT || 8080;
 
 //schema
-const schemaData = mongoose.Schema({
+const inspDatesData = mongoose.Schema({
 	ptandcrossing: Date,
 	electricGen: Date,
 	trd: Date,
@@ -18,32 +18,32 @@ const schemaData = mongoose.Schema({
 	timeStamp: true
 });
 
-const userModel = mongoose.model("user", schemaData);
+const inspdatesModel = mongoose.model("inspdates", inspDatesData);
 
 //read data
 app.get("/getinspdates", async(req, res)=>{
-	const data = await userModel.find({})
+	const data = await inspdatesModel.find({})
 	res.json({success: true, data:data})
 });
 
 //save data in mongo DB
-app.post("/create", async(req, res)=>{
-	const data = new userModel(req.body)
+app.post("/addinspdates", async(req, res)=>{
+	const data = new inspdatesModel(req.body)
 	await data.save()
 	res.send({success: true, message: "data saved successfully", data:data})
 });
 
 //update data
-app.put("/update", async(req, res)=>{
+app.put("/updateinspdates", async(req, res)=>{
 	const{_id,...rest} = req.body
-	const data = await userModel.updateOne({_id: _id}, rest)
+	const data = await inspdatesModel.updateOne({_id: _id}, rest)
 	res.send({success: true, message:"data updated successfully", data: data})
 });
 
 //delete data
 app.delete("/delete/:id", async(req, res)=>{
 	const id = req.params.id
-	const data = await userModel.deleteOne({_id: id})
+	const data = await inspdatesModel.deleteOne({_id: id})
 	res.send({success: true, message:"data deleted successfully", data: data})
 });
 
