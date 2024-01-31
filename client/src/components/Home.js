@@ -18,19 +18,13 @@ function Student (props) {
 
 //functional component example
 export default function Home () {
-	// initial state declaration of name, email, year prop
-	const [formData, setFormData] = useState({
-		name: "",
-		email: "",
-		year: ""
-	});
 	const [formDataEdit, setFormDataEdit] = useState({
 		name: "",
 		email: "",
 		year: "",
 		_id: ""
 	});
-	const [dataList, setDataList] = useState([]);
+
 
 	const handleDelete = async(id)=>{
 		const data = await axios.delete("/delete/"+id);

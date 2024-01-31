@@ -5,11 +5,11 @@ import InspDatesModal from './InspDatesModal';
 import axios from 'axios';
 axios.defaults.baseURL = "http://localhost:8080/";
 
-function GetInspDates () {
+function JointInspDates () {
 	const [dataList, setDataList] = useState([]);
 	const [show, setShow] = useState(false);
-	const handleClose = () => setShow(false);
-  	const handleShow = () => setShow(true);
+	const [addSection, setAddSection] = useState(false);
+	const [editSection, setEditSection] = useState(false);
   	const [formData, setFormData] = useState({
   		stniblc: "",
 	    ptandcrossing: "",
@@ -18,7 +18,30 @@ function GetInspDates () {
 	    trackpwi: "",
 	    ssd: ""
 	});
-  	const forwardData = (e)=>{
+	const [formDataEdit, setFormDataEdit] = useState({
+		stniblc: "",
+	    ptandcrossing: "",
+	    electricGen: "",
+	    trd: "",
+	    trackpwi: "",
+	    ssd: "",
+		_id: ""
+	});
+	const handleClose = () => {
+		setShow(false);
+		setAddSection(false);
+		setEditSection(false);
+	}
+	const handleShow = () => {
+  		setShow(true);
+  		setAddSection(true);
+  	}
+  	const handleEdit = async(el)=>{
+		setShow(true);
+		setEditSection(true);
+		setFormDataEdit(el);
+	}
+  	const handleOnChange = (e)=>{
   		const {value, name} = (e.target)
   		setFormData((preve)=>{
 	      return{
@@ -27,6 +50,17 @@ function GetInspDates () {
 	      }
 	    });
 	}
+	const handleEditOnChange = async (e)=>{
+		const {value, name} = (e.target)
+		console.log(value, name)
+		setFormDataEdit((preve)=>{
+			return{
+				...preve,
+				[name]: value
+			}
+		})
+
+	}
 	const getFetchData = async()=>{
 		const data = await axios.get("/getinspdates");
 		const dataObj = data.data;
@@ -34,10 +68,20 @@ function GetInspDates () {
 			setDataList(dataObj.data);
 		}
 	}
-	const refreshData = async(formData)=>{
+	const handleSubmit = async(e)=>{
+		e.preventDefault();
 		const data = await axios.post("/addinspdates",formData);
 		if (data.data.success) {
-			getFetchData()
+			handleClose();
+			getFetchData();
+		}
+	}
+	const handleUpdate = async(e)=>{
+		e.preventDefault();
+		const data = await axios.put("/updateinspdates", formDataEdit);
+		if (data.data.success) {
+			handleClose();
+			getFetchData();
 		}
 	}
 	useEffect(()=>{
@@ -62,7 +106,7 @@ function GetInspDates () {
 						dataList.map((el, i)=>{
 							return (
 								<tr key={i}>
-									<td>{el.name}</td>
+									<td>{el.stniblc}</td>
 									<td>{el.ptandcrossing}</td>
 									<td>{el.electricGen}</td>
 									<td>{el.trd}</td>
@@ -78,8 +122,13 @@ function GetInspDates () {
 				</tbody>
 			</Table>
 			<Button type="button" onClick={handleShow}>Add Inspections</Button>
-			<InspDatesModal show={show} onSubmit={refreshData} onClose={handleClose} formData={formData} forwardData={forwardData} />
+			{addSection && (
+				<InspDatesModal show={show} onClose={handleClose} handleSubmit={handleSubmit} rest={formData} handleOnChange={handleOnChange} />
+			)}
+			{editSection && (
+				<InspDatesModal show={show} onClose={handleClose} handleSubmit={handleUpdate} rest={formDataEdit} handleOnChange={handleEditOnChange} />
+			)}
 		</div>
 	)
 }
-export default GetInspDates;
+export default JointInspDates;

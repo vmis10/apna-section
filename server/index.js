@@ -9,6 +9,7 @@ const PORT = process.env.PORT || 8080;
 
 //schema
 const inspDatesData = mongoose.Schema({
+	stniblc: String,
 	ptandcrossing: Date,
 	electricGen: Date,
 	trd: Date,

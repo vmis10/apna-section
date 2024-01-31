@@ -3,7 +3,7 @@ import {BrowserRouter, Routes, Route} from 'react-router-dom';
 
 import MainLayout from './MainLayout';
 import Home from './components/Home';
-import GetInspDates from './components/GetInspDates';
+import JointInspDates from './components/JointInspDates';
 
 function App() {
   return (
@@ -11,7 +11,7 @@ function App() {
         <Routes>
           <Route path="/" element={<MainLayout />}>
             <Route path="" element={<Home />} />
-            <Route path="/getinspdates" element={<GetInspDates />} />
+            <Route path="/getinspdates" element={<JointInspDates />} />
           </Route>
         </Routes>
     </BrowserRouter>
