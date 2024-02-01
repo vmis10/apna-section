@@ -68,7 +68,7 @@ function JointInspDates () {
 		}
 	}
 	const handleSubmit = async(e)=>{
-		//e.preventDefault();
+		e.preventDefault();
 		const data = await axios.post("/addinspdates",formData);
 		if (data.data.success) {
 			handleClose();
@@ -76,7 +76,7 @@ function JointInspDates () {
 		}
 	}
 	const handleUpdate = async(e)=>{
-		//e.preventDefault();
+		e.preventDefault();
 		const data = await axios.put("/updateinspdates", formDataEdit);
 		if (data.data.success) {
 			handleClose();
@@ -87,7 +87,7 @@ function JointInspDates () {
 		getFetchData()
 	},[]);
 	return (
-		<div className="tableContainer">
+		<>
 			<Table striped bordered hover>
 				<thead>
 					<tr>
@@ -127,7 +127,7 @@ function JointInspDates () {
 			{editSection && (
 				<InspDatesModal show={show} onClose={handleClose} handleSubmit={handleUpdate} rest={formDataEdit} handleOnChange={handleEditOnChange} />
 			)}
-		</div>
+		</>
 	)
 }
 export default JointInspDates;

@@ -9,12 +9,12 @@ const PORT = process.env.PORT || 8080;
 
 //schema
 const inspDatesData = mongoose.Schema({
-	stniblc: String,
-	ptandcrossing: Date,
-	electricGen: Date,
-	trd: Date,
-	trackpwi: Date,
-	ssd: Date
+	stniblc: { type: String, required: true, trim: true},
+	ptandcrossing:  { type: String, trim: true},
+	electricGen: { type: String, trim: true},
+	trd: { type: String, trim: true},
+	trackpwi: { type: String, trim: true},
+	ssd: { type: String, trim: true}
 }, {
 	timeStamp: true
 });
