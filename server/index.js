@@ -24,6 +24,7 @@ const inspdatesModel = mongoose.model("inspdates", inspDatesData);
 //read data
 app.get("/getinspdates", async(req, res)=>{
 	const data = await inspdatesModel.find({})
+	console.log(data.data)
 	res.json({success: true, data:data})
 });
 

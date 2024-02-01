@@ -52,7 +52,6 @@ function JointInspDates () {
 	}
 	const handleEditOnChange = async (e)=>{
 		const {value, name} = (e.target)
-		console.log(value, name)
 		setFormDataEdit((preve)=>{
 			return{
 				...preve,
@@ -69,7 +68,7 @@ function JointInspDates () {
 		}
 	}
 	const handleSubmit = async(e)=>{
-		e.preventDefault();
+		//e.preventDefault();
 		const data = await axios.post("/addinspdates",formData);
 		if (data.data.success) {
 			handleClose();
@@ -77,7 +76,7 @@ function JointInspDates () {
 		}
 	}
 	const handleUpdate = async(e)=>{
-		e.preventDefault();
+		//e.preventDefault();
 		const data = await axios.put("/updateinspdates", formDataEdit);
 		if (data.data.success) {
 			handleClose();
