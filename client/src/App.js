@@ -2,7 +2,7 @@ import React from 'react';
 import {BrowserRouter, Routes, Route} from 'react-router-dom';
 
 import MainLayout from './MainLayout';
-import Home from './components/Home';
+import Login from './components/Login';
 import JointInspDates from './components/JointInspDates';
 
 function App() {
@@ -10,7 +10,7 @@ function App() {
     <BrowserRouter>
         <Routes>
           <Route path="/" element={<MainLayout />}>
-            <Route index element={<Home />} />
+            <Route index element={<Login />} />
             <Route path="getinspdates" element={<JointInspDates />} />
           </Route>
         </Routes>
