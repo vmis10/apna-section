@@ -2,7 +2,7 @@ import React from 'react';
 function Footer() {
   return (
     <footer className="my-4 text-center text-muted small">
-      Copyright © React-Bootstrap-Template 2021.
+      All rights reserved © 2024 ADSTE Lalitpur Vivek Mishra.
     </footer>
   );
 }

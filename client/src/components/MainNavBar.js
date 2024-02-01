@@ -8,7 +8,7 @@ function MainNavbar () {
   ];
 
   return (
-    <nav className="navbar navbar-expand-lg navbar-light bg-light">
+    <nav className="navbar navbar-expand-lg navbar-dark bg-primary">
       <div className="container-fluid">
         <button className="navbar-toggler collapsed"
                 type="button"
