@@ -5,7 +5,7 @@ import {Button, Table, Form, Col, Row} from 'react-bootstrap';
 import axios from 'axios';
 axios.defaults.baseURL = "http://localhost:8080/";
 
-export default function Login () {
+export default function Signup () {
 
 	// const handleDelete = async(id)=>{
 	// 	const data = await axios.delete("/delete/"+id);
@@ -23,7 +23,7 @@ export default function Login () {
           event.stopPropagation();
         }
         else {
-            props.handleSubmit(event);
+            handleSubmit(event);
         }
         setValidated(true);
     };
@@ -44,11 +44,7 @@ export default function Login () {
 		            	<Form.Control.Feedback type="invalid">This field is mandatory</Form.Control.Feedback>
 		            </Form.Group>
 		        </Row>
-	            <Button variant="primary" type="submit">Login</Button>
-	            <div className="mb-3">
-		            <Link to="/forgot">Forgot password</Link>
-		            <Link to="/signup">New account</Link>
-		        </div>
+	            <Button variant="primary">Signup</Button>
 	        </Form> 
 		</>
 	);
