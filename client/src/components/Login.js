@@ -5,18 +5,10 @@ import {Button, Table, Form, Col, Row} from 'react-bootstrap';
 import axios from 'axios';
 axios.defaults.baseURL = "http://localhost:8080/";
 
-export default function Signup () {
-
-	// const handleDelete = async(id)=>{
-	// 	const data = await axios.delete("/delete/"+id);
-	// 	if (data.data.success) {
-	// 		getFetchData()
-	// 		console.log(data)
-	// 	}
-	// }
+export default function Login () {
 	const [validated, setValidated] = useState(false);
 	const navigate = useNavigate();
-	const [signupData, setSignupData] = useState({
+	const [loginData, setLoginData] = useState({
   		emailid: "",
 	    password: ""
 	});
@@ -28,7 +20,7 @@ export default function Signup () {
 	});
 	const handleOnChange = (e)=>{
   		const {value, name} = (e.target)
-  		setSignupData((preve)=>{
+  		setLoginData((preve)=>{
 	      return{
 	        ...preve,
 	        [name]: value
@@ -48,14 +40,18 @@ export default function Signup () {
     };
     const handleSubmit = async(e)=>{
 		e.preventDefault();
-		const data = await axios.post("/signup",signupData);
+		const data = await axios.post("/login",loginData);
 		if (data.data.success) {
 			localStorage.setItem("user", JSON.stringify(data.data.data));
 			navigate('/getinspdates');			
 		}
+		else {
+			alert("User doesn't exist")
+		}
 	}
 	return (
 		<>
+			<h1>Login</h1>
 			<Form noValidate validated={validated} onSubmit={handleValidation}>
 				<Row className="mb-3">
 		            <Form.Group as={Col} md="4" controlId="emailid">
@@ -71,7 +67,7 @@ export default function Signup () {
 		            	<Form.Control.Feedback type="invalid">This field is mandatory</Form.Control.Feedback>
 		            </Form.Group>
 		        </Row>
-	            <Button variant="primary" type="submit">Signup</Button>
+	            <Button variant="primary" type="submit">Login</Button>
 	        </Form> 
 		</>
 	);

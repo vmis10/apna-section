@@ -11,15 +11,28 @@ app.listen(PORT, ()=>console.log("server is running"))
 
 //register in mongo DB
 app.post("/signup", async(req, res)=>{
-	const data = new signupModel(req.body)
-	await data.save()
-	res.send({success: true, message: "data saved successfully", data:data})
+	const data = new signupModel(req.body);
+	const result = await data.save();
+	result.password = undefined;
+	res.send({success: true, message: "registered successfully", data:result})
+});
+
+app.post("/login", async(req, res)=>{
+	if (req.body.password && req.body.emailid) {
+		const data = await signupModel.findOne(req.body).select("-password")
+		if (data) {
+			res.send({success: true, message: "user found", data:data})
+		} else {
+			res.send({result: "No user found"})
+		}
+	} else {
+		res.send({result: "No user found"})
+	}
 });
 
 //read data
 app.get("/getinspdates", async(req, res)=>{
 	const data = await inspdatesModel.find({})
-	console.log(data.data)
 	res.json({success: true, data:data})
 });
 

@@ -1,12 +1,13 @@
 import React from 'react';
-import {NavLink} from 'react-router-dom';
+import {NavLink, useNavigate} from 'react-router-dom';
 
 function MainNavbar () {
-  const items = [
-    { path: '/signup', title: 'Signup' },
-    { path: '/getinspdates', title: 'Inspection Dates' }
-  ];
-
+  const auth = localStorage.getItem("user");
+  const navigate = useNavigate();
+  const logout = ()=>{
+    localStorage.clear();
+    navigate('/signup');
+  }
   return (
     <nav className="navbar navbar-expand-lg navbar-dark bg-primary">
       <div className="container-fluid">
@@ -21,14 +22,15 @@ function MainNavbar () {
           <span className="navbar-toggler-icon"/>
         </button>
         <div className="collapse navbar-collapse" id="navbarMenu">
-          <ul className="navbar-nav">
-            {
-              items.map((item, i) => (
-                <li key={i} className="nav-item">
-                  <NavLink className="nav-link" to={item.path}>{item.title}</NavLink>
-                </li>
-              ))
-            }
+          <ul className="navbar-nav nav-right">
+            {auth ? <>
+              <li className="nav-item"><NavLink className="nav-link" to="/">Home</NavLink></li>
+              <li className="nav-item"><NavLink className="nav-link" to="/getinspdates">Inspection Dates</NavLink></li>
+              <li className="nav-item"><NavLink className="nav-link" onClick={logout} to="/signup">Log Out ({JSON.parse(auth).name})</NavLink></li>
+            </> : <>
+              <li className="nav-item"><NavLink className="nav-link" to="/signup">Sign Up</NavLink></li>
+              <li className="nav-item"><NavLink className="nav-link" to="/login">Login</NavLink></li>
+            </>}
           </ul>
         </div>
       </div>
