@@ -3,15 +3,15 @@ const cors = require('cors');
 require('./db/config');
 const PORT = process.env.PORT || 8080;
 const inspdatesModel = require('./db/InspDates');
-const registerationModel = require('./db/Register');
+const signupModel = require('./db/Signup');
 const app = express();
 app.use(cors());
 app.use(express.json());
 app.listen(PORT, ()=>console.log("server is running"))
 
 //register in mongo DB
-app.post("/register", async(req, res)=>{
-	const data = new registerationModel(req.body)
+app.post("/signup", async(req, res)=>{
+	const data = new signupModel(req.body)
 	await data.save()
 	res.send({success: true, message: "data saved successfully", data:data})
 });

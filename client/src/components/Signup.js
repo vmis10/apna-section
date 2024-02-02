@@ -20,6 +20,12 @@ export default function Signup () {
   		emailid: "",
 	    password: ""
 	});
+	useEffect(()=>{
+	    const auth = localStorage.getItem("user");
+	    if (auth) {
+	      navigate('/getinspdates');
+	    }
+	  });
 	const handleOnChange = (e)=>{
   		const {value, name} = (e.target)
   		setSignupData((preve)=>{
@@ -42,10 +48,10 @@ export default function Signup () {
     };
     const handleSubmit = async(e)=>{
 		e.preventDefault();
-		const data = await axios.post("/register",signupData);
+		const data = await axios.post("/signup",signupData);
 		if (data.data.success) {
 			localStorage.setItem("user", JSON.stringify(data.data.data));
-			navigate('getinspdates');			
+			navigate('/getinspdates');			
 		}
 	}
 	return (

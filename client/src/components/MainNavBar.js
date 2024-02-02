@@ -3,8 +3,8 @@ import {NavLink} from 'react-router-dom';
 
 function MainNavbar () {
   const items = [
-    { path: '/', title: 'Signup' },
-    { path: 'getinspdates', title: 'Inspection Dates' }
+    { path: '/signup', title: 'Signup' },
+    { path: '/getinspdates', title: 'Inspection Dates' }
   ];
 
   return (
