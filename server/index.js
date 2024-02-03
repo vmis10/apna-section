@@ -1,5 +1,7 @@
 const express = require('express');
 const cors = require('cors');
+const Jwt = require('jsonwebtoken');
+const JwtKey = 'e-dashboard';
 require('./db/config');
 const PORT = process.env.PORT || 8080;
 const inspdatesModel = require('./db/InspDates');
@@ -9,19 +11,45 @@ app.use(cors());
 app.use(express.json());
 app.listen(PORT, ()=>console.log("server is running"))
 
+function verifyToken (req, res, next) {
+	let token = req.headers['authorization'];
+	if (token) {
+		token = token.split(' ')[1];
+		Jwt.verify(token, JwtKey, (err, valid)=>{
+			if (err) {
+				res.status(401).send({result: "please provide valid token"})
+			} else {
+				next();
+			}
+		});
+	} else {
+		res.status(403).send({result: "please add token"})
+	}
+}
+
 //register in mongo DB
 app.post("/signup", async(req, res)=>{
 	const data = new signupModel(req.body);
 	const result = await data.save();
 	result.password = undefined;
-	res.send({success: true, message: "registered successfully", data:result})
+	Jwt.sign({result}, JwtKey, {expiresIn: "2h"}, (err, token)=> {
+		if (err) {
+			res.send({result: "Something went wrong, please try later"})
+		}
+		res.send({success: true, message: "registered successfully", data:result, auth:token})
+	})
 });
 
 app.post("/login", async(req, res)=>{
 	if (req.body.password && req.body.emailid) {
 		const data = await signupModel.findOne(req.body).select("-password")
 		if (data) {
-			res.send({success: true, message: "user found", data:data})
+			Jwt.sign({data}, JwtKey, {expiresIn: "2h"}, (err, token)=> {
+				if (err) {
+					res.send({result: "Something went wrong, please try later"})
+				}
+				res.send({success: true, message: "user found", data:data, auth:token})
+			})
 		} else {
 			res.send({result: "No user found"})
 		}
@@ -31,27 +59,27 @@ app.post("/login", async(req, res)=>{
 });
 
 //read data
-app.get("/getinspdates", async(req, res)=>{
+app.get("/getinspdates", verifyToken, async(req, res)=>{
 	const data = await inspdatesModel.find({})
 	res.json({success: true, data:data})
 });
 
 //save data in mongo DB
-app.post("/addinspdates", async(req, res)=>{
+app.post("/addinspdates", verifyToken, async(req, res)=>{
 	const data = new inspdatesModel(req.body)
 	await data.save()
 	res.send({success: true, message: "data saved successfully", data:data})
 });
 
 //update data
-app.put("/updateinspdates", async(req, res)=>{
+app.put("/updateinspdates", verifyToken, async(req, res)=>{
 	const{_id,...rest} = req.body
 	const data = await inspdatesModel.updateOne({_id: _id}, rest)
 	res.send({success: true, message:"data updated successfully", data: data})
 });
 
 //delete data
-app.delete("/delete/:id", async(req, res)=>{
+app.delete("/delete/:id", verifyToken, async(req, res)=>{
 	const id = req.params.id
 	const data = await inspdatesModel.deleteOne({_id: id})
 	res.send({success: true, message:"data deleted successfully", data: data})

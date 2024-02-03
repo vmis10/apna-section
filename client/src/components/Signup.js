@@ -49,8 +49,9 @@ export default function Signup () {
     const handleSubmit = async(e)=>{
 		e.preventDefault();
 		const data = await axios.post("/signup",signupData);
-		if (data.data.success) {
+		if (data.data.auth) {
 			localStorage.setItem("user", JSON.stringify(data.data.data));
+			localStorage.setItem("token", JSON.stringify(data.data.auth));
 			navigate('/getinspdates');			
 		}
 	}

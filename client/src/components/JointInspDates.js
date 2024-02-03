@@ -61,7 +61,11 @@ function JointInspDates () {
 
 	}
 	const getFetchData = async()=>{
-		const data = await axios.get("/getinspdates");
+		const data = await axios.get("/getinspdates", {
+			headers: {
+				authorization: JSON.parse(localStorage.getItem("token"))
+			}
+		});
 		const dataObj = data.data;
 		if (dataObj.success) {
 			setDataList(dataObj.data);
@@ -69,7 +73,10 @@ function JointInspDates () {
 	}
 	const handleSubmit = async(e)=>{
 		e.preventDefault();
-		const data = await axios.post("/addinspdates",formData);
+		const data = await axios.post("/addinspdates",{
+			headers: {
+				authorization: JSON.parse(localStorage.getItem("token"))
+			}, formData);
 		if (data.data.success) {
 			handleClose();
 			getFetchData();
@@ -77,7 +84,10 @@ function JointInspDates () {
 	}
 	const handleUpdate = async(e)=>{
 		e.preventDefault();
-		const data = await axios.put("/updateinspdates", formDataEdit);
+		const data = await axios.put("/updateinspdates", {
+			headers: {
+				authorization: JSON.parse(localStorage.getItem("token"))
+			}, formDataEdit);
 		if (data.data.success) {
 			handleClose();
 			getFetchData();
