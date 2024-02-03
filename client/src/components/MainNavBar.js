@@ -24,9 +24,9 @@ function MainNavbar () {
         <div className="collapse navbar-collapse" id="navbarMenu">
           <ul className="navbar-nav nav-right">
             {auth ? <>
-              <li className="nav-item"><NavLink className="nav-link" to="/">Home</NavLink></li>
+              <li className="nav-item"><NavLink className="nav-link" to="/home">Home</NavLink></li>
               <li className="nav-item"><NavLink className="nav-link" to="/getinspdates">Inspection Dates</NavLink></li>
-              <li className="nav-item"><NavLink className="nav-link" onClick={logout} to="/signup">Log Out ({JSON.parse(auth).name})</NavLink></li>
+              <li className="nav-item"><NavLink className="nav-link" onClick={logout} to="/signup">Log Out ({JSON.parse(auth).emailid})</NavLink></li>
             </> : <>
               <li className="nav-item"><NavLink className="nav-link" to="/signup">Sign Up</NavLink></li>
               <li className="nav-item"><NavLink className="nav-link" to="/login">Login</NavLink></li>

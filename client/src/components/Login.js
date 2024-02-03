@@ -47,7 +47,7 @@ export default function Login () {
 			navigate('/getinspdates');			
 		}
 		else {
-			alert("User doesn't exist")
+			alert(data.data.message)
 		}
 	}
 	return (

@@ -17,27 +17,32 @@ function verifyToken (req, res, next) {
 		token = token.split(' ')[1];
 		Jwt.verify(token, JwtKey, (err, valid)=>{
 			if (err) {
-				res.status(401).send({result: "please provide valid token"})
+				res.status(401).send({message: "please provide valid token"})
 			} else {
 				next();
 			}
 		});
 	} else {
-		res.status(403).send({result: "please add token"})
+		res.status(403).send({message: "please add token"})
 	}
 }
 
 //register in mongo DB
 app.post("/signup", async(req, res)=>{
-	const data = new signupModel(req.body);
-	const result = await data.save();
-	result.password = undefined;
-	Jwt.sign({result}, JwtKey, {expiresIn: "2h"}, (err, token)=> {
-		if (err) {
-			res.send({result: "Something went wrong, please try later"})
-		}
-		res.send({success: true, message: "registered successfully", data:result, auth:token})
-	})
+	let user = await signupModel.findOne(req.body);
+	if (user) {
+	    return res.send({success: false, message: 'Your are already registered with us'});
+	} else {
+		const data = new signupModel(req.body);
+		const result = await data.save();
+		result.password = undefined;
+		Jwt.sign({result}, JwtKey, {expiresIn: "2h"}, (err, token)=> {
+			if (err) {
+				res.send({message: "Something went wrong, please try later"})
+			}
+			res.send({success: true, message: "registered successfully", data:result, auth:token})
+		})
+	}
 });
 
 app.post("/login", async(req, res)=>{
@@ -46,15 +51,15 @@ app.post("/login", async(req, res)=>{
 		if (data) {
 			Jwt.sign({data}, JwtKey, {expiresIn: "2h"}, (err, token)=> {
 				if (err) {
-					res.send({result: "Something went wrong, please try later"})
+					res.send({message: "Something went wrong, please try later"})
 				}
 				res.send({success: true, message: "user found", data:data, auth:token})
 			})
 		} else {
-			res.send({result: "No user found"})
+			res.send({message: "No user found"})
 		}
 	} else {
-		res.send({result: "No user found"})
+		res.send({message: "No user found"})
 	}
 });
 

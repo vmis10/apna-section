@@ -6,6 +6,7 @@ import axios from 'axios';
 axios.defaults.baseURL = "http://localhost:8080/";
 
 function JointInspDates () {
+	const token = 'Bearer ' + JSON.parse(localStorage.getItem('token'));
 	const [dataList, setDataList] = useState([]);
 	const [show, setShow] = useState(false);
 	const [addSection, setAddSection] = useState(false);
@@ -63,20 +64,21 @@ function JointInspDates () {
 	const getFetchData = async()=>{
 		const data = await axios.get("/getinspdates", {
 			headers: {
-				authorization: JSON.parse(localStorage.getItem("token"))
+				Authorization: token
 			}
 		});
 		const dataObj = data.data;
+		console.log(dataObj)
 		if (dataObj.success) {
 			setDataList(dataObj.data);
 		}
 	}
 	const handleSubmit = async(e)=>{
 		e.preventDefault();
-		const data = await axios.post("/addinspdates",{
+		const data = await axios.post("/addinspdates",formData, {
 			headers: {
-				authorization: JSON.parse(localStorage.getItem("token"))
-			}, formData);
+				Authorization: token
+			}});
 		if (data.data.success) {
 			handleClose();
 			getFetchData();
@@ -84,10 +86,10 @@ function JointInspDates () {
 	}
 	const handleUpdate = async(e)=>{
 		e.preventDefault();
-		const data = await axios.put("/updateinspdates", {
+		const data = await axios.put("/updateinspdates", formDataEdit, {
 			headers: {
-				authorization: JSON.parse(localStorage.getItem("token"))
-			}, formDataEdit);
+				Authorization: token
+			}});
 		if (data.data.success) {
 			handleClose();
 			getFetchData();
