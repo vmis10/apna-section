@@ -64,9 +64,18 @@ app.post("/login", async(req, res)=>{
 });
 
 //read data
-app.get("/getinspdates", verifyToken, async(req, res)=>{
-	const data = await inspdatesModel.find({})
-	res.json({success: true, data:data})
+app.get("/getinspdates/:userId", verifyToken, async(req, res)=>{
+	let data = await inspdatesModel.find({
+		"$or": [
+			{userId: {$regex: req.params.userId}}
+		]
+	})
+	//const data = await inspdatesModel.findOne({userId: req.params.userId})
+	if (data) {
+		res.json({success: true, data:data})
+	} else {
+		res.send({message: "No data found"})
+	}
 });
 
 //save data in mongo DB

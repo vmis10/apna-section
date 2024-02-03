@@ -1,6 +1,7 @@
 const mongoose = require('mongoose');
 
 const inspDatesData = mongoose.Schema({
+	userId: { type: String, trim: true},
 	stniblc: { type: String, required: true, trim: true},
 	ptandcrossing:  { type: String, trim: true},
 	electricGen: { type: String, trim: true},

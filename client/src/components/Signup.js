@@ -17,6 +17,7 @@ export default function Signup () {
 	const [validated, setValidated] = useState(false);
 	const navigate = useNavigate();
 	const [signupData, setSignupData] = useState({
+		name: "",
   		emailid: "",
 	    password: ""
 	});
@@ -59,6 +60,13 @@ export default function Signup () {
 	return (
 		<>
 			<Form noValidate validated={validated} onSubmit={handleValidation}>
+				<Row className="mb-3">
+		            <Form.Group as={Col} md="4" controlId="name">
+		                <Form.Label>User Name</Form.Label>
+		                <Form.Control type="text" required name="name" placeholder="Enter your user name" onChange={handleOnChange}/>
+		                <Form.Control.Feedback type="invalid">This field is mandatory</Form.Control.Feedback>
+		            </Form.Group>
+		        </Row>
 				<Row className="mb-3">
 		            <Form.Group as={Col} md="4" controlId="emailid">
 		                <Form.Label>Email</Form.Label>

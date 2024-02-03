@@ -7,11 +7,13 @@ axios.defaults.baseURL = "http://localhost:8080/";
 
 function JointInspDates () {
 	const token = 'Bearer ' + JSON.parse(localStorage.getItem('token'));
+	const userId = JSON.parse(localStorage.getItem('user'))._id;
 	const [dataList, setDataList] = useState([]);
 	const [show, setShow] = useState(false);
 	const [addSection, setAddSection] = useState(false);
 	const [editSection, setEditSection] = useState(false);
   	const [formData, setFormData] = useState({
+  		userId: userId,
   		stniblc: "",
 	    ptandcrossing: "",
 	    electricGen: "",
@@ -20,6 +22,7 @@ function JointInspDates () {
 	    ssd: ""
 	});
 	const [formDataEdit, setFormDataEdit] = useState({
+		userId: userId,
 		stniblc: "",
 	    ptandcrossing: "",
 	    electricGen: "",
@@ -62,13 +65,12 @@ function JointInspDates () {
 
 	}
 	const getFetchData = async()=>{
-		const data = await axios.get("/getinspdates", {
+		const data = await axios.get("/getinspdates/"+userId, {
 			headers: {
 				Authorization: token
 			}
 		});
 		const dataObj = data.data;
-		console.log(dataObj)
 		if (dataObj.success) {
 			setDataList(dataObj.data);
 		}
