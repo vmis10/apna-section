@@ -1,7 +1,6 @@
 import React from 'react';
 import {useState, useEffect} from 'react';
-import Button from 'react-bootstrap/Button';
-import Form from 'react-bootstrap/Form';
+import {Col, Button, Form} from 'react-bootstrap';
 import axios from 'axios';
 axios.defaults.baseURL = "http://localhost:8080/";
 
@@ -69,8 +68,7 @@ function MaintCircular () {
 		getFetchData()
 	},[]);
 	return (
-		<>
-			<h3>S&T maintenance Circulars</h3>
+		<div className="mt-3 px-4">
 			{
 				dataList.map((el, i)=>{
 					return (
@@ -80,21 +78,23 @@ function MaintCircular () {
 					)
 				})
 			}
-			<Button type="button" onClick={handleShow}>Add New Circular</Button>
+			<Button type="button" onClick={handleShow} className="mt-3">Add New Circular</Button>
 			{addSection && (<Form noValidate validated={validated} onSubmit={handleValidation}>
-	            <Form.Group className="mb-3" controlId="title">
+	            <Form.Group as={Col} md="4" controlId="title" className="mt-3">
 	                <Form.Label>Title</Form.Label>
 	                <Form.Control type="text" required name="title" placeholder="Title" value={formData.title} onChange={handleOnChange} />
 	                <Form.Control.Feedback type="invalid">This field is mandatory</Form.Control.Feedback>
 	            </Form.Group>
-	            <Form.Group className="mb-3" controlId="link">
+	            <Form.Group as={Col} md="4" controlId="link" className="mt-2">
 	                <Form.Label>Drive Link</Form.Label>
-	                <Form.Control.Feedback type="invalid">This field is mandatory</Form.Control.Feedback>
-	                <Form.Control type="text" name="link" placeholder="Link" value={formData.link} onChange={handleOnChange} />
+	                <Form.Control type="text" required name="link" placeholder="Link" value={formData.link} onChange={handleOnChange} />
+	            	<Form.Control.Feedback type="invalid">This field is mandatory</Form.Control.Feedback>
 	            </Form.Group>
-	            <Button variant="primary" type="submit">Save</Button>
+	            <Col md="4" className="mt-3">
+		            <Button variant="primary" type="submit">Save</Button>
+		        </Col>
 	        </Form>)}
-		</>
+		</div>
 	)
 }
 export default MaintCircular;
