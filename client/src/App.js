@@ -15,12 +15,12 @@ function App() {
         <MainNavbar/>
         <Routes>
           <Route element={<MainLayout />}>
+            <Route path="/maintCircular" element={<MaintCircular />} />
             <Route path="/getinspdates" element={<JointInspDates />} />
           </Route>
           <Route path="/signup" element={<Signup />} />
           <Route path="/login" element={<Login />} />
-          <Route path="/maintCircular" element={<MaintCircular />} />
-          <Route path="*" element={<MaintCircular />} />
+          <Route path="*" element={<Login />} />
         </Routes>
       </BrowserRouter>
       <Footer/>

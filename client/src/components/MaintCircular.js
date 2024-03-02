@@ -70,7 +70,7 @@ function MaintCircular () {
 	},[]);
 	return (
 		<>
-			<h1>S&T maintenance Circulars</h1>
+			<h3>S&T maintenance Circulars</h3>
 			{
 				dataList.map((el, i)=>{
 					return (
@@ -80,7 +80,7 @@ function MaintCircular () {
 					)
 				})
 			}
-			<Button type="button" onClick={handleShow}>Add Inspections</Button>
+			<Button type="button" onClick={handleShow}>Add New Circular</Button>
 			{addSection && (<Form noValidate validated={validated} onSubmit={handleValidation}>
 	            <Form.Group className="mb-3" controlId="title">
 	                <Form.Label>Title</Form.Label>

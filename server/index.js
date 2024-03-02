@@ -30,9 +30,14 @@ function verifyToken (req, res, next) {
 
 //register in mongo DB
 app.post("/signup", async(req, res)=>{
-	let user = await signupModel.findOne(req.body);
+	//let user = await signupModel.findOne(req.body);
+	let user = await signupModel.findOne({
+		"$or": [
+			{emailid: req.body.emailid} 
+		]
+	});
 	if (user) {
-	    return res.send({success: false, message: 'Your are already registered with us'});
+	    return res.send({success: true, message: 'Your are already registered with us'});
 	} else {
 		const data = new signupModel(req.body);
 		const result = await data.save();
@@ -79,7 +84,7 @@ app.get("/getinspdates/:userId", verifyToken, async(req, res)=>{
 	}
 });
 
-app.get("/getmaintcirculars", async(req, res)=>{
+app.get("/getmaintcirculars", verifyToken, async(req, res)=>{
 	let data = await maintCircularModel.find({})
 	if (data) {
 		res.json({success: true, data:data})
