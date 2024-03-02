@@ -5,6 +5,7 @@ const JwtKey = 'e-dashboard';
 require('./db/config');
 const PORT = process.env.PORT || 8080;
 const inspdatesModel = require('./db/InspDates');
+const maintCircularModel = require('./db/maintCircular');
 const signupModel = require('./db/Signup');
 const app = express();
 app.use(cors());
@@ -76,6 +77,22 @@ app.get("/getinspdates/:userId", verifyToken, async(req, res)=>{
 	} else {
 		res.send({message: "No data found"})
 	}
+});
+
+app.get("/getmaintcirculars", async(req, res)=>{
+	let data = await maintCircularModel.find({})
+	if (data) {
+		res.json({success: true, data:data})
+	} else {
+		res.send({message: "No data found"})
+	}
+});
+
+//save data in mongo DB
+app.post("/addmaintcirculars", verifyToken, async(req, res)=>{
+	const data = new maintCircularModel(req.body)
+	await data.save()
+	res.send({success: true, message: "data saved successfully", data:data})
 });
 
 //save data in mongo DB

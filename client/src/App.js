@@ -4,7 +4,7 @@ import MainLayout from './MainLayout';
 import MainNavbar from './components/MainNavbar';
 import Footer from './components/Footer';
 import Signup from './components/Signup';
-import Home from './components/Home';
+import MaintCircular from './components/MaintCircular';
 import Login from './components/Login';
 import JointInspDates from './components/JointInspDates';
 
@@ -15,12 +15,12 @@ function App() {
         <MainNavbar/>
         <Routes>
           <Route element={<MainLayout />}>
-            <Route path="/home" element={<Home />} />
             <Route path="/getinspdates" element={<JointInspDates />} />
           </Route>
           <Route path="/signup" element={<Signup />} />
           <Route path="/login" element={<Login />} />
-          <Route path="*" element={<Signup />} />
+          <Route path="/maintCircular" element={<MaintCircular />} />
+          <Route path="*" element={<MaintCircular />} />
         </Routes>
       </BrowserRouter>
       <Footer/>
