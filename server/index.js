@@ -31,24 +31,24 @@ function verifyToken (req, res, next) {
 //register in mongo DB
 app.post("/signup", async(req, res)=>{
 	//let user = await signupModel.findOne(req.body);
-	let user = await signupModel.findOne({
-		"$or": [
-			{emailid: req.body.emailid} 
-		]
-	});
-	if (user) {
-	    return res.send({success: true, message: 'Your are already registered with us'});
-	} else {
-		const data = new signupModel(req.body);
-		const result = await data.save();
-		result.password = undefined;
-		Jwt.sign({result}, JwtKey, {expiresIn: "2h"}, (err, token)=> {
-			if (err) {
-				res.send({message: "Something went wrong, please try later"})
-			}
-			res.send({success: true, message: "registered successfully", data:result, auth:token})
-		})
-	}
+	// let user = await signupModel.findOne({
+	// 	"$or": [
+	// 		{emailid: req.body.emailid} 
+	// 	]
+	// });
+	// if (user) {
+	//     return res.send({success: true, message: 'Your are already registered with us'});
+	// } else {
+	// 	const data = new signupModel(req.body);
+	// 	const result = await data.save();
+	// 	result.password = undefined;
+	// 	Jwt.sign({result}, JwtKey, {expiresIn: "2h"}, (err, token)=> {
+	// 		if (err) {
+	// 			res.send({message: "Something went wrong, please try later"})
+	// 		}
+	// 		res.send({success: true, message: "registered successfully", data:result, auth:token})
+	// 	})
+	// }
 });
 
 app.post("/login", async(req, res)=>{
