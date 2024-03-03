@@ -2,6 +2,7 @@ import React from 'react';
 import {BrowserRouter, Routes, Route} from 'react-router-dom';
 import MainLayout from './MainLayout';
 import MainNavbar from './components/MainNavBar';
+import ExternalLinks from './components/ExternalLinks';
 import Footer from './components/Footer';
 import Signup from './components/Signup';
 import MaintCircular from './components/MaintCircular';
@@ -20,6 +21,7 @@ function App() {
           </Route>
           <Route path="/signup" element={<Signup />} />
           <Route path="/login" element={<Login />} />
+          <Route path="/externallinks" element={<ExternalLinks />} />
           <Route path="*" element={<Login />} />
         </Routes>
       </BrowserRouter>
