@@ -1,7 +1,7 @@
 import React from 'react';
 import {BrowserRouter, Routes, Route} from 'react-router-dom';
 import MainLayout from './MainLayout';
-import MainNavbar from './components/MainNavbar';
+import MainNavbar from './components/MainNavBar';
 import Footer from './components/Footer';
 import Signup from './components/Signup';
 import MaintCircular from './components/MaintCircular';
