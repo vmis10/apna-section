@@ -3,7 +3,8 @@ import {useState, useEffect} from 'react';
 import {Button, Table} from 'react-bootstrap';
 import InspDatesModal from './InspDatesModal';
 import axios from 'axios';
-axios.defaults.baseURL = "http://localhost:8080/";
+import * as Constants  from './Constants';
+axios.defaults.baseURL = Constants.URL;
 
 function JointInspDates () {
 	const token = 'Bearer ' + JSON.parse(localStorage.getItem('token'));

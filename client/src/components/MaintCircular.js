@@ -2,7 +2,8 @@ import React from 'react';
 import {useState, useEffect} from 'react';
 import {Col, Button, Form} from 'react-bootstrap';
 import axios from 'axios';
-axios.defaults.baseURL = "http://localhost:8080/";
+import * as Constants  from './Constants';
+axios.defaults.baseURL = Constants.URL;
 
 function MaintCircular () {
 	const token = 'Bearer ' + JSON.parse(localStorage.getItem('token'));

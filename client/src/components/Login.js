@@ -3,7 +3,8 @@ import {useState, useEffect} from 'react';
 import { useNavigate } from 'react-router-dom';
 import {Button, Table, Form, Col, Row} from 'react-bootstrap';
 import axios from 'axios';
-axios.defaults.baseURL = "http://localhost:8080/";
+import * as Constants  from './Constants';
+axios.defaults.baseURL = Constants.URL;
 
 export default function Login () {
 	const [validated, setValidated] = useState(false);
