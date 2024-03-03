@@ -1,7 +1,7 @@
 client/node_modules/
 server/node_modules/
 .cache/
-.env
+server/.env
 .DS_Store
 coverage/
 .vscode/
