@@ -105,11 +105,11 @@ function JointInspDates () {
 			<Table striped bordered hover>
 				<thead>
 					<tr>
-						<th>Station/IB/LC</th>
-						<th>Point & Crossing</th>
-						<th>Electric General</th>
-						<th>TRD Track Ckt</th>
-						<th>PWI Track Ckt</th>
+						<th>STN/IB/LC</th>
+						<th>Pt & Xing</th>
+						<th>Electrical</th>
+						<th>TRD Bond</th>
+						<th>Track Engg.</th>
 						<th>SSD</th>
 						<th></th>
 					</tr>
