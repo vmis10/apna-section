@@ -23,12 +23,12 @@ function MainNavbar () {
         </button>
         <div className="collapse navbar-collapse" id="navbarMenu">
           <ul className="navbar-nav">
+            <li className="nav-item"><NavLink className="nav-link" to="/externallinks">External Links</NavLink></li>
             {auth ? <>
               <li className="nav-item"><NavLink className="nav-link" to="/maintCircular">Maintenance Circulars</NavLink></li>
               <li className="nav-item"><NavLink className="nav-link" to="/getinspdates">Inspection Dates</NavLink></li>
               <li className="nav-item"><NavLink className="nav-link" onClick={logout} to="/login">Log Out ({JSON.parse(auth).emailid})</NavLink></li>
             </> : <>
-              <li className="nav-item"><NavLink className="nav-link" to="/externallinks">External Links</NavLink></li>
               <li className="nav-item"><NavLink className="nav-link" to="/login">Login</NavLink></li>
             </>}
           </ul>
