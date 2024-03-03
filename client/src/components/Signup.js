@@ -23,7 +23,7 @@ export default function Signup () {
 	    password: ""
 	});
 	useEffect(()=>{
-	    const auth = localStorage.getItem("user");
+	    const auth = localStorage.getItem("token");
 	    if (auth) {
 	      navigate('/getinspdates');
 	    }

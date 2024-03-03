@@ -2,7 +2,7 @@ import React from 'react';
 import {NavLink, useNavigate} from 'react-router-dom';
 
 function MainNavbar () {
-  const auth = localStorage.getItem("user");
+  const auth = localStorage.getItem("token");
   const navigate = useNavigate();
   const logout = ()=>{
     localStorage.clear();
@@ -26,7 +26,7 @@ function MainNavbar () {
             <li className="nav-item"><NavLink className="nav-link" to="/externallinks">External Links</NavLink></li>
             {auth ? <>
               <li className="nav-item"><NavLink className="nav-link" to="/getinspdates">Inspection Dates</NavLink></li>
-              <li className="nav-item"><NavLink className="nav-link" onClick={logout} to="/login">Log Out ({JSON.parse(auth).emailid})</NavLink></li>
+              <li className="nav-item"><NavLink className="nav-link" onClick={logout} to="/login">Log Out ({JSON.parse(localStorage.getItem("user")).emailid})</NavLink></li>
             </> : <>
               <li className="nav-item"><NavLink className="nav-link" to="/login">Login</NavLink></li>
             </>}

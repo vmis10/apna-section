@@ -2,9 +2,9 @@ import React from 'react';
 import { Navigate, Outlet } from 'react-router-dom';
 
 function MainLayout () {
-  const auth = localStorage.getItem("user");
+  const auth = localStorage.getItem("token");
   return (
-    auth ? <Outlet/>:<Navigate to="/signup"/>
+    auth ? <Outlet/>:<Navigate to="/login"/>
   )
 }
 

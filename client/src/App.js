@@ -4,7 +4,6 @@ import MainLayout from './MainLayout';
 import MainNavbar from './components/MainNavBar';
 import ExternalLinks from './components/ExternalLinks';
 import Footer from './components/Footer';
-import Signup from './components/Signup';
 import Login from './components/Login';
 import JointInspDates from './components/JointInspDates';
 
@@ -17,7 +16,6 @@ function App() {
           <Route element={<MainLayout />}>
             <Route path="/getinspdates" element={<JointInspDates />} />
           </Route>
-          <Route path="/signup" element={<Signup />} />
           <Route path="/login" element={<Login />} />
           <Route path="/externallinks" element={<ExternalLinks />} />
           <Route path="*" element={<Login />} />
